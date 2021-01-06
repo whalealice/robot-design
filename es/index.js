@@ -1,16 +1,41 @@
 import React from 'react';
 
-var styles = ".wrapper {\n  color: red;\n}\n";
+function styleInject(css, ref) {
+  if (ref === void 0) ref = {};
+  var insertAt = ref.insertAt;
 
-class ButtonComponent extends React.Component {
-    constructor(props) {
-        super(props);
+  if (!css || typeof document === 'undefined') {
+    return;
+  }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
     }
-    render() {
-        return (React.createElement("div", { className: styles.wrapper },
-            React.createElement("button", null, "ButtonComponent333"),
-            React.createElement("div", null, "1111")));
-    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
 }
+
+var css_248z = ".wrapper {\n  color: green;\n}\n";
+styleInject(css_248z);
+
+var ButtonComponent = function ButtonComponent() {
+  return React.createElement("div", {
+    className: css_248z.wrapper
+  }, React.createElement("button", null, "ButtonComponent333"), React.createElement("div", null, "1111222444"));
+};
 
 export { ButtonComponent };

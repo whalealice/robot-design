@@ -1,13 +1,15 @@
-
 import path from 'path';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json'
-import clear from 'rollup-plugin-clear'
-import less from 'rollup-plugin-less';
+import resolve from '@rollup/plugin-node-resolve';
+import { getBabelOutputPlugin } from '@rollup/plugin-babel'; // es6转成es5
+import commonjs from '@rollup/plugin-commonjs'; // commonJS转成es5
+import typescript from 'rollup-plugin-typescript2'; // typescript
+import clear from 'rollup-plugin-clear' // 打包清空之前的文件
+import postcss from 'rollup-plugin-postcss' // css预处理
+import { uglify } from "rollup-plugin-uglify" // 压缩
 
-const isDev = process.env.NODE_ENV !== 'production';
+
+const isProd = process.env.NODE_ENV === 'production';
 /** @type {import('rollup').RollupOptions} */
 const options = {
     input: 'src/main.js',
@@ -20,8 +22,12 @@ const options = {
     }],
     external:['react'],
     plugins: [
-        less({
-            exclude: 'node_modules/**',
+        getBabelOutputPlugin({
+            presets: ['@babel/preset-env']
+        }),
+        postcss({
+            // modules: true,
+            // extensions: ['.less']
         }),
         resolve(),
         commonjs(),
@@ -29,7 +35,8 @@ const options = {
         clear({
             targets: ['es', 'lib', 'dist'],
             watch: true,
-        })
+        }),
+        isProd && uglify(),
     ]
 };
 export default options;
