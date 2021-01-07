@@ -1,0 +1,77 @@
+
+
+  * {
+    box-sizing: border-box;
+    font-size: 12px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+  }
+  .clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  
+   /*滚动条*/
+   ::-webkit-scrollbar {
+    margin-right: 2px;
+    width: 5px; /*对垂直流动条有效*/
+    height: 5px; /*对水平流动条有效*/
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background-color: #cdd9e6;
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background-color: #b0c0d0;
+  }
+// }
+// #robotWrapper{
+//   :global{
+//     .icon {
+//       width: 1em;
+//       height: 1em;
+//       vertical-align: -0.15em;
+//       fill: currentColor;
+//       overflow: hidden;
+//     }
+//     .ellipsis{
+//       overflow: hidden;
+//       white-space: nowrap;
+//       text-overflow: ellipsis;
+//     }
+//     .ant-notification {
+//       width: auto;
+//     }
+//     .react-draggable-transparent-selection * {
+//       pointer-events: initial!important;
+//     }
+//     .ant-checkbox-wrapper{
+//       line-height: 14px;
+//     }
+//     .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner {
+//       border-color: #505766;
+//     }
+//     .ant-checkbox-checked .ant-checkbox-inner {
+//       background-color: #fff;
+//       border-color: #ccc;
+//     }
+//     .ant-checkbox-checked .ant-checkbox-inner::after {
+//       border: 2px solid #ee2233;
+//       border-top: 0;
+//       border-left: 0;
+//       left: 3px;
+//       top: 45%;
+//     }
+//     .ant-checkbox-indeterminate .ant-checkbox-inner::after{
+//       height: 2px;
+//     }
+//     .ant-checkbox-checked::after{
+//       border: 1px solid #505766;
+//     }
+//   }

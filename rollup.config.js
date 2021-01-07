@@ -6,7 +6,8 @@ import commonjs from '@rollup/plugin-commonjs'; // commonJS转成es5
 import typescript from 'rollup-plugin-typescript2'; // typescript
 import clear from 'rollup-plugin-clear' // 打包清空之前的文件
 import postcss from 'rollup-plugin-postcss' // css预处理
-import { uglify } from "rollup-plugin-uglify" // 压缩
+import { uglify } from "rollup-plugin-uglify" // 压缩js
+import image from '@rollup/plugin-image' // 引入图片
 
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -26,8 +27,8 @@ const options = {
             presets: ['@babel/preset-env']
         }),
         postcss({
-            // modules: true,
-            // extensions: ['.less']
+            modules: false,
+            extensions: ['.less']
         }),
         resolve(),
         commonjs(),
@@ -37,6 +38,8 @@ const options = {
             watch: true,
         }),
         isProd && uglify(),
+        image(),
+
     ]
 };
 export default options;

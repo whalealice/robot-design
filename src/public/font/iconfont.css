@@ -1,0 +1,69 @@
+@font-face {font-family: "vpa-robot-iconfont";
+  src: url('./iconfont.eot'); /* IE9 */
+  src: url('./iconfont.eot') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'),
+  url('./iconfont.woff') format('woff'),
+  url('./iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('./iconfont.svg') format('svg'); /* iOS 4.1- */
+}
+
+.vpa-iconfont {
+  font-family: "vpa-robot-iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #ffffff;
+}
+.vpa-iconfont:hover {
+ color: #588CE9;
+}
+
+.icon-vap-drop-down:before {
+  content: "\e612";
+}
+
+.icon-vpa-guanbi:before {
+  content: "\e61c";
+}
+
+.icon-vpa-tixinglan:before {
+  content: "\e61f";
+}
+
+.icon-vpa-shezhi:before {
+  content: "\e620";
+}
+
+.icon-vpa-liaotianlan:before {
+  content: "\e621";
+}
+
+.icon-vpa-huanyihuan:before {
+  content: "\e622";
+}
+
+.icon-vpa-yuyin:before {
+  content: "\e61b";
+}
+
+/* .icon-saoma:before {
+  content: "\e61d";
+} */
+
+.icon-vpa-bangzhuwenhao:before {
+  content: "\e61e";
+}
+
+.icon-vpa-jianpan:before {
+  content: "\e623";
+}
+
+.icon-vpa-huichejiantou:before {
+  content: "\e624";
+}
+.icon-vpa-bianji:before {
+  content: "\e625";
+}
+

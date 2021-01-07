@@ -1,0 +1,31 @@
+@import './variables.less';
+.robot-ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.robot-msg-wrapper{
+    display: inline-flex;
+    width: auto;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 40px;
+    color: @primary-text;
+    border-radius: 0 7px 7px;
+    background-color: @primary-white;
+    margin-top: 6px;
+    padding: 6px 10px;
+    a{
+        color:@primary-blue;
+    }
+    a:hover{
+        color: @hover-blue;
+    }
+}
+.robot-card-wrapper{
+    width: 100%;
+    background: @primary-white;
+    border-radius: 0 8px 8px 8px;
+    margin-top: 12px;
+    padding: 12px;
+}

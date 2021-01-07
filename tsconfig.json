@@ -69,6 +69,7 @@
   },
   "include": [
     "src",
-    "css.d.ts"//配置的.d.ts文件
+    "css.d.ts", //配置的.d.ts文件
+    "images.d.ts", //配置的.d.ts文件
   ]
 }
