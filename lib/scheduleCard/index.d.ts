@@ -5,7 +5,7 @@ declare type SheduleInfo = {
     text: string;
     showData: any[];
     width?: number;
-    type?: string;
+    size?: string;
 };
 declare const ScheduleCard: React.FC<SheduleInfo>;
 export default ScheduleCard;

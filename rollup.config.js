@@ -1,7 +1,7 @@
 import path from 'path';
 import pkg from './package.json'
 import resolve from '@rollup/plugin-node-resolve';
-import { getBabelOutputPlugin } from '@rollup/plugin-babel'; // es6转成es5
+import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs'; // commonJS转成es5
 import typescript from 'rollup-plugin-typescript2'; // typescript
 import clear from 'rollup-plugin-clear' // 打包清空之前的文件
@@ -23,15 +23,14 @@ const options = {
     }],
     external:['react'],
     plugins: [
-        getBabelOutputPlugin({
-            presets: ['@babel/preset-env']
-        }),
+        resolve(),
+        commonjs(),
+        babel({ presets: ['@babel/preset-react'] }),
         postcss({
             modules: false,
             extensions: ['.less']
         }),
-        resolve(),
-        commonjs(),
+        
         typescript(),
         clear({
             targets: ['es', 'lib', 'dist'],

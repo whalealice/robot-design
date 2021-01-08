@@ -1,0 +1,45 @@
+@import '../../styles/mixins.less';
+@import '../../styles/variables.less';
+@namespace: robot-primary;
+&-radio{
+    width: 14px;
+    height: 14px;
+    appearance: none;
+    position: relative;
+    outline: none;
+    display: inline-flex;
+}
+&-radio:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border: 1px solid @light-gray;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+&-radio:checked:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border: 1px solid @primary-text;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+&-radio:checked:after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    text-align: center;
+    background: @primary-red;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+&-radio:checked + label {
+    color: #edd19d;
+    border-color: red;
+}

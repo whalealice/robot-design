@@ -4,14 +4,14 @@ import './text.less'
 type TextInfo = {
 	text: string,
 	link?: string,
-	type?: string, // default ,large, small
+	size?: string, // default ,large, small
 }
 
 const TextCard:React.FC<TextInfo> = (props) =>{
-	const {text, link , type} = props
+	const {text, link , size} = props
 	if (link) {
 		return (
-			<div className={`robot-text-wrapper ${type ? `robot-text-${type}` : 'robot-text-defalut'} `} >
+			<div className={`robot-text-wrapper ${size ? `robot-text-${size}` : 'robot-text-defalut'} `} >
 				<a
 					href={link}
 					target={'_blank'}
@@ -22,7 +22,7 @@ const TextCard:React.FC<TextInfo> = (props) =>{
 			</div>
 		)
 	}
-	return (<div className={`robot-text-wrapper ${type ? `robot-text-${type}` : 'robot-text-default'} `}>{text}</div>)
+	return (<div className={`robot-text-wrapper ${size ? `robot-text-${size}` : 'robot-text-default'} `}>{text}</div>)
 }
 
 export default TextCard

@@ -9,15 +9,15 @@ type SheduleInfo = {
 	text: string,
 	showData: any[],
 	width?: number,
-	type?: string,
+	size?: string,
 }
 
 const ScheduleCard:React.FC<SheduleInfo> = (props) => {
-	const { title, text, showData, type } = props
+	const { title, text, showData, size, width } = props
 	return (
-		<div className={`robot-schedule-wrapper ${type ? `robot-schedule-${type}` : 'robot-schedule-default'} `}>
-			<TextCard text={text} type={type ? type : 'default'}/>
-			<div className='robot-schedule-card' style={{width:'260px'}}>
+		<div className={`${size ? `robot-schedule-${size}` : 'robot-schedule-default'} `}>
+			<TextCard text={text} size={size ? size : 'default'}/>
+			<div className='robot-schedule-card' style={{width: width ? `${width}px` : '260px'}}>
 				<div className='robot-schedule-header'>
 					<img src={conferenceIcon} alt={title || '日程'}/>
 					<span>{title || '这是标题'}</span>
