@@ -1,8 +1,9 @@
 import React from 'react';
-import '../../styles/mixins.less';
+import './text.less';
 declare type TextInfo = {
     text: string;
     link?: string;
+    type?: string;
 };
 declare const TextCard: React.FC<TextInfo>;
 export default TextCard;
