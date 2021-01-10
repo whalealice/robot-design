@@ -6,7 +6,8 @@ declare type ListInfo = {
     width?: number;
     type?: string;
     listData: any[];
-    pageSize?: Number;
+    pageSize?: number;
+    onOk: (e?: any) => void;
 };
 declare const ListCard: React.FC<ListInfo>;
 export default ListCard;

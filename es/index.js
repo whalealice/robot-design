@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 function styleInject(css, ref) {
   if (ref === void 0) ref = {};
@@ -72,76 +72,100 @@ styleInject(css_248z$3);
 var Radio = function Radio(props) {
   var className = props.className,
       value = props.value,
-      label = props.label,
-      defaultChecked = props.defaultChecked;
+      label = props.label;
   return /*#__PURE__*/React.createElement("div", {
     className: className
   }, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     name: "listradio",
     value: value,
-    label: label,
-    defaultChecked: defaultChecked
+    label: label
   }), /*#__PURE__*/React.createElement("div", null, props.label));
 }; // 父级组件
 
 
 var RadioGroup = function RadioGroup(props) {
   var _onChange = props.onChange,
-      defaultValue = props.defaultValue,
       className = props.className;
   return /*#__PURE__*/React.createElement("div", {
     onChange: function onChange(e) {
-      _onChange(e);
+      _onChange(e.target.value);
     },
     className: className
   }, React.Children.map(props.children, function (child) {
+    if (!child) return false;
     return /*#__PURE__*/React.cloneElement(child, {
       label: child.props.children,
-      value: child.props.value,
-      defaultChecked: child.props.value === defaultValue
+      value: child.props.value
     });
   }));
 };
 
-var css_248z$4 = ".robot-ellipsis {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n.robot-msg-wrapper {\n  display: inline-flex;\n  width: auto;\n  align-items: center;\n  justify-content: flex-start;\n  min-height: 40px;\n  color: #111;\n  border-radius: 0 7px 7px;\n  background-color: #ffffff;\n  margin-top: 6px;\n  padding: 6px 10px;\n}\n.robot-msg-wrapper a {\n  color: #588CE9;\n}\n.robot-msg-wrapper a:hover {\n  color: #8dbbf5;\n}\n.robot-card-wrapper {\n  width: 100%;\n  background: #ffffff;\n  border-radius: 0 8px 8px 8px;\n  margin-top: 12px;\n  padding: 12px;\n}\n.robot-list-body {\n  padding: 10px;\n  align-self: flex-start;\n  width: 100%;\n}\n.robot-list-card {\n  display: inline-flex;\n  width: auto;\n  align-items: center;\n  justify-content: flex-start;\n  min-height: 40px;\n  color: #111;\n  border-radius: 0 7px 7px;\n  background-color: #ffffff;\n  margin-top: 6px;\n  padding: 6px 10px;\n  display: flex;\n  flex-direction: column;\n}\n.robot-list-card a {\n  color: #588CE9;\n}\n.robot-list-card a:hover {\n  color: #8dbbf5;\n}\n.robot-list-title {\n  width: 100%;\n  height: 36px;\n  line-height: 36px;\n  text-align: center;\n  color: #111;\n  border-bottom: 1px solid #E6E6E6;\n}\n.robot-list-footer {\n  display: flex;\n  align-items: center;\n  height: 40px;\n  border-top: 1px solid #E6E6E6;\n}\n.robot-list-footer > span {\n  display: inline-flex;\n  justify-content: center;\n  position: relative;\n  flex: 0 0 50%;\n  cursor: pointer;\n}\n.robot-list-footer > span:first-child {\n  color: #47BAEE;\n}\n.robot-list-footer > span:first-child::after {\n  content: \"\";\n  position: absolute;\n  width: 1px;\n  height: 15px;\n  background: #E6E6E6;\n  top: 0;\n  right: 0;\n}\n.robot-list-option {\n  display: flex;\n  height: 36px;\n  color: #2A3038;\n  font-size: 12px;\n  align-items: center;\n}\n.robot-list-option > div {\n  width: 100%;\n  line-height: 36px;\n  margin-left: 6px;\n  border-bottom: 1px solid #E2E2E2;\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n.robot-list-option:last-child > div {\n  border-bottom: none;\n}\n.robot-list-button {\n  padding: 12px;\n  margin: 10px 0 0 10px;\n  border-radius: 4px;\n  align-self: flex-start;\n  border: 1px solid #ddd;\n  background: #fff;\n  cursor: pointer;\n}\n.robot-list-button:hover {\n  background: #ddd;\n}\n.robot-list-default .robot-list-title {\n  font-size: 14px;\n}\n.robot-list-small .robot-list-title {\n  font-size: 12px;\n}\n.robot-list-large .robot-list-title {\n  font-size: 16px;\n}\n";
+var css_248z$4 = ".robot-ellipsis {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n.robot-msg-wrapper {\n  display: inline-flex;\n  width: auto;\n  align-items: center;\n  justify-content: flex-start;\n  min-height: 40px;\n  color: #111;\n  border-radius: 0 7px 7px;\n  background-color: #ffffff;\n  margin-top: 6px;\n  padding: 6px 10px;\n}\n.robot-msg-wrapper a {\n  color: #588CE9;\n}\n.robot-msg-wrapper a:hover {\n  color: #8dbbf5;\n}\n.robot-card-wrapper {\n  width: 100%;\n  background: #ffffff;\n  border-radius: 0 8px 8px 8px;\n  margin-top: 12px;\n  padding: 12px;\n}\n-radio {\n  width: 14px;\n  height: 14px;\n  appearance: none;\n  position: relative;\n  outline: none;\n  display: inline-flex;\n}\n-radio:before {\n  content: \"\";\n  width: 14px;\n  height: 14px;\n  border: 1px solid #d9d9d9;\n  display: inline-block;\n  border-radius: 50%;\n  vertical-align: middle;\n}\n-radio:checked:before {\n  content: \"\";\n  width: 14px;\n  height: 14px;\n  border: 1px solid #111;\n  display: inline-block;\n  border-radius: 50%;\n  vertical-align: middle;\n}\n-radio:checked:after {\n  content: \"\";\n  width: 6px;\n  height: 6px;\n  text-align: center;\n  background: #EE2223;\n  border-radius: 50%;\n  display: block;\n  position: absolute;\n  top: 4px;\n  left: 4px;\n}\n-radio:checked + label {\n  color: #edd19d;\n  border-color: red;\n}\n";
 styleInject(css_248z$4);
 
+const Checkbox = (props) => {
+    const { className, value, label } = props;
+    return (React.createElement("div", { className: className },
+        React.createElement("input", { type: "checkbox", name: "listcheckbox", value: value }),
+        React.createElement("div", null, label)));
+};
+// 父级组件
+const CheckboxGroup = (props) => {
+    const { onChange, className } = props;
+    const [checkedList, setChecked] = useState([]);
+    return (React.createElement("div", { onChange: (e) => {
+            const checked = e.target.checked;
+            const value = e.target.value;
+            let list = checkedList;
+            if (checked) {
+                list.push(value);
+            }
+            else {
+                let index = 0;
+                index = checkedList.indexOf(value);
+                list.splice(index, 1);
+            }
+            setChecked(list);
+            onChange(list);
+        }, className: className }, React.Children.map(props.children, (child) => {
+        if (!child)
+            return false;
+        return React.cloneElement(child, {
+            label: child.props.children,
+            value: child.props.value,
+        });
+    })));
+};
+
+var css_248z$5 = ".robot-ellipsis {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n.robot-msg-wrapper {\n  display: inline-flex;\n  width: auto;\n  align-items: center;\n  justify-content: flex-start;\n  min-height: 40px;\n  color: #111;\n  border-radius: 0 7px 7px;\n  background-color: #ffffff;\n  margin-top: 6px;\n  padding: 6px 10px;\n}\n.robot-msg-wrapper a {\n  color: #588CE9;\n}\n.robot-msg-wrapper a:hover {\n  color: #8dbbf5;\n}\n.robot-card-wrapper {\n  width: 100%;\n  background: #ffffff;\n  border-radius: 0 8px 8px 8px;\n  margin-top: 12px;\n  padding: 12px;\n}\n.robot-list-body {\n  padding: 10px;\n  align-self: flex-start;\n  width: 100%;\n}\n.robot-list-card {\n  display: inline-flex;\n  width: auto;\n  align-items: center;\n  justify-content: flex-start;\n  min-height: 40px;\n  color: #111;\n  border-radius: 0 7px 7px;\n  background-color: #ffffff;\n  margin-top: 6px;\n  padding: 6px 10px;\n  display: flex;\n  flex-direction: column;\n}\n.robot-list-card a {\n  color: #588CE9;\n}\n.robot-list-card a:hover {\n  color: #8dbbf5;\n}\n.robot-list-title {\n  width: 100%;\n  height: 36px;\n  line-height: 36px;\n  text-align: center;\n  color: #111;\n  border-bottom: 1px solid #E6E6E6;\n}\n.robot-list-footer {\n  width: 100%;\n  display: flex;\n  align-items: center;\n  height: 40px;\n  border-top: 1px solid #E6E6E6;\n}\n.robot-list-footer > span {\n  display: inline-flex;\n  justify-content: center;\n  position: relative;\n  flex: 0 0 50%;\n  cursor: pointer;\n}\n.robot-list-footer > span:first-child {\n  color: #47BAEE;\n}\n.robot-list-footer > span:first-child::after {\n  content: \"\";\n  position: absolute;\n  width: 1px;\n  height: 15px;\n  background: #E6E6E6;\n  top: 0;\n  right: 0;\n}\n.robot-list-option {\n  display: flex;\n  height: 36px;\n  color: #2A3038;\n  font-size: 12px;\n  align-items: center;\n}\n.robot-list-option > div {\n  width: 100%;\n  line-height: 36px;\n  margin-left: 6px;\n  border-bottom: 1px solid #E2E2E2;\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n.robot-list-option:last-child > div {\n  border-bottom: none;\n}\n.robot-list-button {\n  padding: 12px;\n  margin: 10px 0 0 10px;\n  border-radius: 4px;\n  align-self: flex-start;\n  border: 1px solid #ddd;\n  background: #fff;\n  cursor: pointer;\n}\n.robot-list-button:hover {\n  background: #ddd;\n}\n.robot-list-default .robot-list-title {\n  font-size: 14px;\n}\n.robot-list-small .robot-list-title {\n  font-size: 12px;\n}\n.robot-list-large .robot-list-title {\n  font-size: 16px;\n}\n";
+styleInject(css_248z$5);
+
 const ListCard = (props) => {
-    const { text, size, width, type, listData } = props;
+    const { text, size, width, type, listData, pageSize = 3, onOk } = props;
     // const { text, showData: { content }, modelID, nodeId, contextid } = t
     // const { modelData, showData: { listData } } = content
-    // const [row, setRow] = useState(0)
-    // const [radioVal, setRadioVal] = useState('')
-    // const [checkboxVal, setCheckboxVal] = useState([])
-    // useEffect(() => {
-    // 	setRow(modelData.row)
-    // }, [modelData, setRow])
-    // const onClickSure = useCallback(() => {
-    // 	if (
-    // 		(modelID === 102 && !radioVal) ||
-    // 		(modelID === 103 && !checkboxVal.length)
-    // 	) {
-    // 		return
-    // 	}
-    // 	const params = {
-    // 		msg: modelID === 102 ? radioVal : checkboxVal.join(','),
-    // 		askForCanvasNodeId: nodeId,
-    // 		askForContextId: contextid,
-    // 		sendRightMsg: true,
-    // 	}
-    // 	clickToSend(params)
-    // }, [
-    // 	modelID,
-    // 	radioVal,
-    // 	checkboxVal,
-    // 	nodeId,
-    // 	contextid,
-    // 	clickToSend,
-    // ])
-    // const showMore = useCallback(() => {
-    // 	setRow((r) => r + 3)
-    // }, [setRow])
+    const [row, setRow] = useState(0);
+    const [radioVal, setRadioVal] = useState('');
+    const [checkboxVal, setCheckboxVal] = useState([]);
+    useEffect(() => {
+        setRow(pageSize);
+    }, []);
+    const onSure = () => {
+        if ((type === 'radio' && !radioVal) ||
+            (type === 'checkbox' && !checkboxVal)) {
+            return false;
+        }
+        const params = {
+            msg: type === 'radio' ? radioVal : checkboxVal.join(','),
+            sendRightMsg: true,
+        };
+        console.log('444', params);
+        onOk(params);
+    };
+    const onMore = useCallback(() => {
+        setRow((r) => r + pageSize);
+    }, [setRow]);
     // const radioChange = useCallback(
     // 	(e) => {
     // 		setRadioVal(e.target.value)
@@ -203,44 +227,33 @@ const ListCard = (props) => {
     // 	radioChange,
     // 	checkboxChange,
     // ])
-    const onGroupChange = (e) => {
-        console.log('ffff', e.target.value);
+    const onCheckboxChange = (value) => {
+        console.log('aaa', value);
+        setCheckboxVal(value);
+    };
+    const onRadioChange = (value) => {
+        console.log('aaa', value);
+        setRadioVal(value);
     };
     return (React.createElement("div", { className: `${size ? `robot-list-${size}` : 'robot-list-default'} ` },
-        React.createElement(TextCard, { text: text, size: size ? size : 'default' }),
+        React.createElement(TextCard, { text: text || '选择列表', size: size ? size : 'default' }),
         React.createElement("div", { className: 'robot-list-card', style: { width: width ? `${width}px` : '260px' } },
             React.createElement("div", { className: 'robot-list-title' }, "\u9009\u62E9\u5217\u8868"),
             React.createElement("div", { className: 'robot-list-body' }, type === 'radio' ?
-                React.createElement(RadioGroup, { name: "listRadio", onChange: (e) => onGroupChange(e) }, listData && listData.map((item) => {
-                    return React.createElement(Radio, { value: item.value, className: 'robot-list-option' }, item.label);
+                React.createElement(RadioGroup, { name: "listRadio", onChange: (value) => onRadioChange(value) }, listData && listData.map((item, index) => {
+                    if (index < row) {
+                        return React.createElement(Radio, { value: item.value, className: 'robot-list-option' }, item.label);
+                    }
                 }))
-                // <form ref={radioForm as React.RefObject<HTMLInputElement>}>
-                // 	{listData && listData.map((item, index)=>{
-                // 		if(pageSize && index < pageSize){
-                // 			return (
-                // 				<div
-                // 					key={`options-${index}`}
-                // 					className={'robot-list-option'}
-                // 				>
-                // 					<input type="radio" name="listradio" id={item.value} className={'robot-list-radio'}></input>
-                // 					<div title={item.name}>{item.name}</div>
-                // 				</div>
-                // 			)
-                // 		}else{
-                // 			return (
-                // 				<div
-                // 					key={`options-${index}`}
-                // 					className={'robot-list-option'}
-                // 				>
-                // 					<input type="radio" name="listradio" id={item.value}className={'robot-list-radio'}></input>
-                // 					<div title={item.name}>{item.name}</div>
-                // 				</div>
-                // 			)
-                // 		}
-                // 	})}
-                // </form>
-                : null),
-            React.createElement("div", { className: 'robot-list-footer' }))));
+                :
+                    React.createElement(CheckboxGroup, { name: "listCheckbox", onChange: (value) => onCheckboxChange(value) }, listData && listData.map((item, index) => {
+                        if (index < row) {
+                            return React.createElement(Checkbox, { value: item.value, className: 'robot-list-option' }, item.label);
+                        }
+                    }))),
+            React.createElement("div", { className: 'robot-list-footer' },
+                React.createElement("span", { onClick: onSure }, "\u786E\u5B9A"),
+                React.createElement("span", { onClick: onMore }, "\u52A0\u8F7D\u66F4\u591A")))));
 };
 
 export { ListCard, ScheduleCard, TextCard };

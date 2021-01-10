@@ -8,7 +8,7 @@ import clear from 'rollup-plugin-clear' // 打包清空之前的文件
 import postcss from 'rollup-plugin-postcss' // css预处理
 import { uglify } from "rollup-plugin-uglify" // 压缩js
 import image from '@rollup/plugin-image' // 引入图片
-
+import alias from '@rollup/plugin-alias';
 
 const isProd = process.env.NODE_ENV === 'production';
 /** @type {import('rollup').RollupOptions} */
@@ -30,7 +30,11 @@ const options = {
             modules: false,
             extensions: ['.less']
         }),
-        
+        alias({
+            entries: {
+                react: './node_modules/react',
+            }
+        }),
         typescript(),
         clear({
             targets: ['es', 'lib', 'dist'],

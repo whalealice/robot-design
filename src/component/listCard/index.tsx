@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, Fragment, useRef } from 'react
 // import { Checkbox, Radio } from 'antd'
 import {TextCard} from '../../main.js'
 import  {RadioGroup, Radio}  from '../radio/radio.jsx'
+import  {CheckboxGroup, Checkbox}  from '../checkbox/checkbox'
 import './list.less'
 
 
@@ -11,50 +12,44 @@ type ListInfo = {
 	width?: number,
 	type?: string, // 'radio' 'checkbox'
 	listData: any[],
-	pageSize?: Number, //显示几行
+	pageSize?: number, //显示几行 可选参数
+	onOk: (e?:any) => void,
+	// defaultValue?: any,
 }
 
 const ListCard:React.FC<ListInfo> = (props) => {
-	const { text, size, width, type, listData  } = props
+	const { text, size, width, type, listData, pageSize= 3, onOk  } = props
 
 	// const { text, showData: { content }, modelID, nodeId, contextid } = t
 	// const { modelData, showData: { listData } } = content
-	// const [row, setRow] = useState(0)
-	// const [radioVal, setRadioVal] = useState('')
-	// const [checkboxVal, setCheckboxVal] = useState([])
+	const [row, setRow] = useState<number>(0)
+	const [radioVal, setRadioVal] = useState<string>('')
+	const [checkboxVal, setCheckboxVal] = useState<any[]>([])
 
-	// useEffect(() => {
-	// 	setRow(modelData.row)
-	// }, [modelData, setRow])
+	useEffect(() => {
+		setRow(pageSize)
+	}, [])
 
-	// const onClickSure = useCallback(() => {
-	// 	if (
-	// 		(modelID === 102 && !radioVal) ||
-	// 		(modelID === 103 && !checkboxVal.length)
-	// 	) {
-	// 		return
-	// 	}
+	const onSure = () => {
+		if (
+			(type === 'radio' && !radioVal) ||
+			(type === 'checkbox' && !checkboxVal)
+		) {
+			return false
+		}
 	
-	// 	const params = {
-	// 		msg: modelID === 102 ? radioVal : checkboxVal.join(','),
-	// 		askForCanvasNodeId: nodeId,
-	// 		askForContextId: contextid,
-	// 		sendRightMsg: true,
-	// 	}
-	// 	clickToSend(params)
+		const params = {
+			msg: type === 'radio' ? radioVal : checkboxVal.join(','),
+			sendRightMsg: true,
+		}
+		console.log('444', params)
+		onOk(params)
 	
-	// }, [
-	// 	modelID,
-	// 	radioVal,
-	// 	checkboxVal,
-	// 	nodeId,
-	// 	contextid,
-	// 	clickToSend,
-	// ])
+	}
 
-	// const showMore = useCallback(() => {
-	// 	setRow((r) => r + 3)
-	// }, [setRow])
+	const onMore = useCallback(() => {
+		setRow((r) => r + pageSize)
+		}, [setRow])
 
 	// const radioChange = useCallback(
 	// 	(e) => {
@@ -120,64 +115,49 @@ const ListCard:React.FC<ListInfo> = (props) => {
 	// 	radioChange,
 	// 	checkboxChange,
 	// ])
-	const onGroupChange = (e)=> {
-        console.log('ffff', e.target.value);
+	const onCheckboxChange = (value:any)=>{
+		console.log('aaa',value)
+		setCheckboxVal(value)
+	}
+	const onRadioChange = (value:any)=> {
+		console.log('aaa',value)
+		setRadioVal(value)
     }
 	return (
 		<div className={`${size ? `robot-list-${size}` : 'robot-list-default'} `}>
-			<TextCard text={text} size={size ? size : 'default'}/>
+			<TextCard text={text || '选择列表'} size={size ? size : 'default'}/>
 			<div className={'robot-list-card'} style={{width: width ? `${width}px` : '260px'}}>
 				<div className={'robot-list-title'}>
 					选择列表
 				</div>
 				<div className={'robot-list-body'}>
 					{type === 'radio' ? 
-					<RadioGroup
-						name="listRadio" 
-						onChange={(e) => onGroupChange(e)}>
-						{listData && listData.map((item)=>{
-						
-								return <Radio value={item.value} className={'robot-list-option'}>{item.label}</Radio>
-							
-							
-						})}
-					</RadioGroup>
-						// <form ref={radioForm as React.RefObject<HTMLInputElement>}>
-						// 	{listData && listData.map((item, index)=>{
-						// 		if(pageSize && index < pageSize){
-						// 			return (
-						// 				<div
-						// 					key={`options-${index}`}
-						// 					className={'robot-list-option'}
-						// 				>
-						// 					<input type="radio" name="listradio" id={item.value} className={'robot-list-radio'}></input>
-						// 					<div title={item.name}>{item.name}</div>
-						// 				</div>
-						// 			)
-						// 		}else{
-						// 			return (
-						// 				<div
-						// 					key={`options-${index}`}
-						// 					className={'robot-list-option'}
-						// 				>
-						// 					<input type="radio" name="listradio" id={item.value}className={'robot-list-radio'}></input>
-						// 					<div title={item.name}>{item.name}</div>
-						// 				</div>
-						// 			)
-						// 		}
-						// 	})}
-							
-
-						// </form>
-						: null
+						<RadioGroup
+							name="listRadio" 
+							onChange={(value:any) => onRadioChange(value)}>
+							{listData && listData.map((item, index)=>{
+								if(index < row){
+									return <Radio value={item.value} className={'robot-list-option'}>{item.label}</Radio>	
+								}
+							})}
+						</RadioGroup>
+						: 
+						<CheckboxGroup 
+							name="listCheckbox" 
+							onChange={(value) => onCheckboxChange(value)}
+						>
+							{listData && listData.map((item, index)=>{
+								if(index < row){
+									return <Checkbox value={item.value} className={'robot-list-option'}>{item.label}</Checkbox>	
+								}
+							})}
+						</CheckboxGroup>
 
 					}
 				</div>
 				<div className={'robot-list-footer'}>
-					{/* <span onClick={onClickSure}>
-						确定
-					</span>
-					<span onClick={showMore}>{modelData.bottom}</span> */}
+					<span onClick={onSure}>确定</span>
+					<span onClick={onMore}>加载更多</span>
 				</div>
 			</div>
 		</div>

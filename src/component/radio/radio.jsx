@@ -2,7 +2,7 @@ import React from "react";
 import "./radio.less";
 // 子组件
 const Radio = (props) => {
-    const { className, value, label, defaultChecked } = props;
+    const { className, value, label } = props;
     return (
         <div className={className}>
             <input
@@ -10,7 +10,6 @@ const Radio = (props) => {
                 name="listradio"
                 value={value}
                 label={label}
-                defaultChecked={defaultChecked}
             />
             <div>{props.label}</div>
         </div>
@@ -19,19 +18,19 @@ const Radio = (props) => {
 
 // 父级组件
 const RadioGroup = (props) => {
-    const { onChange, defaultValue, className } = props;
+    const { onChange, className } = props;
     return (
         <div
             onChange={(e) => {
-                onChange(e);
+                onChange(e.target.value);
             }}
             className={className}
         >
             {React.Children.map(props.children, (child) => {
+                if(!child) return false
                 return React.cloneElement(child, {
-                label: child.props.children,
-                value: child.props.value,
-                defaultChecked: child.props.value === defaultValue,
+                    label: child.props.children,
+                    value: child.props.value,
                 });
             })}
         </div>
