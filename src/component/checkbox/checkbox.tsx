@@ -3,7 +3,7 @@ import "./checkbox.less";
 // 子组件
 type CheckboxInfo = {
     className? : string,
-    value: string | number,
+    value?: string | number,
     checked? : string | undefined,
     label?: any,
 }
@@ -21,7 +21,6 @@ const Checkbox:React.FC<CheckboxInfo>  = (props) => {
     );
 };
 type CheckboxGroupInfo = {
-    name?: string,
     onChange: (e?:any) => void,
     // defaultValue?: any[],
     className? : string,

@@ -15,52 +15,24 @@
 	}
 	&-title {
 		width: 100%;
-		height: 36px;
+		// height: 36px;
 		line-height: 36px;
 		text-align: center;
 		color: #111;
 		border-bottom: 1px solid #E6E6E6;
 	}
-	&-footer {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		height: 40px;
-		border-top: 1px solid #E6E6E6;
-		& > span {
-		display: inline-flex;
-		justify-content: center;
-		position: relative;
-		flex: 0 0 50%;
-		cursor: pointer;
-		}
-		& > span:first-child {
-		color: #47BAEE;
-		&::after {
-			content: "";
-			position: absolute;
-			width: 1px;
-			height: 15px;
-			background: #E6E6E6;
-			top: 0;
-			right: 0;
-		}
-		}
-	}
 	&-option {
 		display: flex;
-		height: 36px;
 		color: #2A3038;
 		font-size: 12px;
 		align-items: center;
 		& > div {
-		width: 100%;
-		line-height: 36px;
-		margin-left: 6px;
-		border-bottom: 1px solid #E2E2E2;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+			width: 100%;
+			margin-left: 6px;
+			border-bottom: 1px solid #E2E2E2;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 	}
 	&-option:last-child {
@@ -68,31 +40,81 @@
 		border-bottom: none;
 		}
 	}
-	&-button {
-		padding: 12px;
-		margin: 10px 0 0 10px;
-		border-radius: 4px;
-		align-self: flex-start;
-		border: 1px solid #ddd;
-		background: #fff;
-		cursor: pointer;
-		&:hover {
-		background: #ddd;
+	&-footer {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		// height: 40px;
+		border-top: 1px solid #E6E6E6;
+		& > span {
+			display: inline-flex;
+			justify-content: center;
+			position: relative;
+			flex: 0 0 50%;
+			cursor: pointer;
+		}
+		& > span:first-child {
+			color: #47BAEE;
+			&::after {
+				content: "";
+				position: absolute;
+				width: 1px;
+				height: 15px;
+				background: #E6E6E6;
+				top: 0;
+				right: 0;
+			}
 		}
 	}
 	&-default{
 		.@{namespace}-title{
 			font-size: @default-font-size;
+			height: @list-default-column-height;
+		}
+		.@{namespace}-footer{
+			font-size: @default-font-size;
+			height: @list-default-column-height;
+		}
+		.@{namespace}-option{
+			height: @list-default-column-height;
+			font-size: @default-font-size;
+			& > div {
+				line-height: @list-default-column-height;
+			}
 		}
 	}
 	&-small{
 		.@{namespace}-title{
 			font-size: @small-font-size;
+			height: @list-small-column-height;
+		}
+		.@{namespace}-footer{
+			font-size: @small-font-size;
+			height: @list-small-column-height;
+		}
+		.@{namespace}-option{
+			height: @list-small-column-height;
+			font-size: @small-font-size;
+			& > div {
+				line-height: @list-small-column-height;
+			}
 		}
 	}
 	&-large{
 		.@{namespace}-title{
 			font-size: @large-font-size;
+			height: @list-large-column-height;
+		}
+		.@{namespace}-footer{
+			font-size: @large-font-size;
+			height: @list-large-column-height;
+		}
+		.@{namespace}-option{
+			height: @list-large-column-height;
+			font-size: @large-font-size;
+			& > div {
+				line-height: @list-large-column-height;
+			}
 		}
 	}
 }
