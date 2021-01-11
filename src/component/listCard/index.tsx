@@ -10,14 +10,14 @@ type ListInfo = {
 	size?: string,
 	width?: number,
 	type?: string, // 'radio' 'checkbox'
-	listData: any[],
+	dataSource: any[],
 	pageSize?: number, //显示几行 可选参数
 	onOk: (e?: any) => void,
 	// defaultValue?: any,
 }
 
 const ListCard: React.FC<ListInfo> = (props) => {
-	const { text, size, width, type, listData, pageSize = 3, onOk } = props
+	const { text, size, width, type, dataSource, pageSize = 3, onOk } = props
 	const [row, setRow] = useState<number>(0)
 	const [radioVal, setRadioVal] = useState<string>('')
 	const [checkboxVal, setCheckboxVal] = useState<any[]>([])
@@ -63,7 +63,7 @@ const ListCard: React.FC<ListInfo> = (props) => {
 					{type === 'radio' ?
 						<RadioGroup
 							onChange={(value: any) => onRadioChange(value)}>
-							{listData && listData.map((item, index) => {
+							{dataSource && dataSource.map((item, index) => {
 								if (index < row) {
 									return <Radio key={item.value} value={item.value} className={'robot-list-option'}>{item.label}</Radio>
 								}
@@ -73,7 +73,7 @@ const ListCard: React.FC<ListInfo> = (props) => {
 						<CheckboxGroup
 							onChange={(value) => onCheckboxChange(value)}
 						>
-							{listData && listData.map((item, index) => {
+							{dataSource && dataSource.map((item, index) => {
 								if (index < row) {
 									return <Checkbox key={item.value} value={item.value} className={'robot-list-option'}>{item.label}</Checkbox>
 								}

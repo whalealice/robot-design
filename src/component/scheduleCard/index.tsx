@@ -7,13 +7,13 @@ import {TextCard} from '../../main.js'
 type SheduleInfo = {
 	title?:string,
 	text: string,
-	showData: any[],
+	dataSource: any[],
 	width?: number,
 	size?: string,
 }
 
 const ScheduleCard:React.FC<SheduleInfo> = (props) => {
-	const { title, text, showData, size, width } = props
+	const { title, text, dataSource, size, width } = props
 	return (
 		<div className={`${size ? `robot-schedule-${size}` : 'robot-schedule-default'} `}>
 			<TextCard text={text} size={size ? size : 'default'}/>
@@ -22,7 +22,7 @@ const ScheduleCard:React.FC<SheduleInfo> = (props) => {
 					<img src={conferenceIcon} alt={title || '日程'}/>
 					<span>{title || '这是标题'}</span>
 				</div>
-				{showData && showData.map((item, index)=>{
+				{dataSource && dataSource.map((item, index)=>{
 					return <div className='robot-schedule-item' key={index}>
 						<span>
 							<img src={item.img || 'https://iuap-aiplatform-picdoc.oss-cn-beijing.aliyuncs.com/webrobotresource/img/topic.svg'} alt={'主题'} />

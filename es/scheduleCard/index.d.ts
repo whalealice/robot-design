@@ -3,7 +3,7 @@ import './schedule.less';
 declare type SheduleInfo = {
     title?: string;
     text: string;
-    showData: any[];
+    dataSource: any[];
     width?: number;
     size?: string;
 };

@@ -5,7 +5,7 @@ declare type ListInfo = {
     size?: string;
     width?: number;
     type?: string;
-    listData: any[];
+    dataSource: any[];
     pageSize?: number;
     onOk: (e?: any) => void;
 };

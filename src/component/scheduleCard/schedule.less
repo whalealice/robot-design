@@ -3,9 +3,6 @@
 @namespace: robot-schedule;
 
 .@{namespace}{
-	&-text{
-		.robot-msg-wrapper();
-	}
 	&-card{
 		.robot-card-wrapper();	
 	}
@@ -17,10 +14,6 @@
 		img {
 			margin-right: 8px;
 		}
-		// span{
-		// 	font-size: @default-font-size;
-		// 	font-weight: 400;
-		// }
 	}
 	&-item{
 		// height: 30px;
@@ -91,7 +84,7 @@
 			}
 		} 
 		.@{namespace}-item{
-			font-size: @large-font-size;
+			font-size: @default-font-size;
 			height: @schedule-large-column-height;
 		}
 	}
