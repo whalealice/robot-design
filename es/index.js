@@ -209,9 +209,7 @@ const ScheduleShow = (props) => {
                         React.createElement("div", null, item.endTime)),
                     React.createElement("div", { className: 'robot-schedule-show-text', onClick: () => { onSure(index); } },
                         React.createElement("h4", null, item.value),
-                        item.from ? React.createElement("h5", null,
-                            "\u6765\u81EA",
-                            item.from) : null)));
+                        item.from ? React.createElement("h5", null, item.from) : null)));
             }
         });
     }, [row, dataSource, onSure]);

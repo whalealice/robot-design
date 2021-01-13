@@ -47,7 +47,7 @@ const ScheduleShow:React.FC<ScheduleShowInfo> = (props) => {
 						onClick={()=>{onSure(index)}}
 					>
 						<h4>{item.value}</h4>
-						{item.from ? <h5>来自{item.from}</h5> : null}
+						{item.from ? <h5>{item.from}</h5> : null}
 					</div>
 				</li>
 			)
