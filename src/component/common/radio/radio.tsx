@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.less";
+import "./radio.less";
 
 type RadioInfo = {
     className?: string,

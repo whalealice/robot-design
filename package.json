@@ -1,5 +1,5 @@
 {
-  "name": "robot_design",
+  "name": "robot-design",
   "version": "1.0.2",
   "main": "lib/index.js",
   "module": "es/index.js",

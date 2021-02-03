@@ -15,7 +15,7 @@ type ScheduleShowInfo={
 }
 
 const ScheduleShow:React.FC<ScheduleShowInfo> = (props) => {
-	const {text, size, icon, title, creatTime, dataSource, pageSize = 5, width, onOk} = props
+	const {text, size, icon, title, creatTime, dataSource, pageSize = 5, onOk} = props
 	const [row, setRow] = useState<number>(0)
 	const [showMore, setShowMore] = useState(false)
 	
@@ -57,7 +57,7 @@ const ScheduleShow:React.FC<ScheduleShowInfo> = (props) => {
 	return (
 		<div className={`${size ? `robot-schedule-show-${size}` : 'robot-schedule-show-default'} `}>
 			<TextCard text={text} size={size ? size : 'default'}/>
-			<div className={'robot-schedule-show-card'} style={{ width: width ? `${width}px` : '260px' }}>
+			<div className={'robot-schedule-show-card'}>
 				<div className={'robot-schedule-show-header'}>
 					<img src={icon || 'https://iuap-aiplatform-picdoc.oss-cn-beijing.aliyuncs.com/webrobotresource/img/scheduleApp.png'} alt={'主题'} />
 					<span>{title}</span>

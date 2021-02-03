@@ -1,0 +1,28 @@
+@import '../../styles/mixins.less';
+@import '../../styles/variables.less';
+@namespace: robot-pic;
+
+.@{namespace} {
+  &-wrapper{
+    .robot-msg-wrapper();
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &-default{
+    font-size: @default-font-size;
+  }
+  &-small{
+    font-size: @small-font-size;
+  }
+  &-large{
+    font-size: @large-font-size;
+  }
+  &-img {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+  &-img-text {
+    margin-top: 10px;
+  }
+}

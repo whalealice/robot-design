@@ -13,11 +13,11 @@ type SheduleInfo = {
 }
 
 const ScheduleCard:React.FC<SheduleInfo> = (props) => {
-	const { title, text, dataSource, size, width } = props
+	const { title, text, dataSource, size } = props
 	return (
 		<div className={`${size ? `robot-schedule-${size}` : 'robot-schedule-default'} `}>
 			<TextCard text={text} size={size ? size : 'default'}/>
-			<div className='robot-schedule-card' style={{width: width ? `${width}px` : '260px'}}>
+			<div className='robot-schedule-card'>
 				<div className='robot-schedule-header'>
 					<img src={conferenceIcon} alt={title || '日程'}/>
 					<span>{title || '这是标题'}</span>

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { TextCard } from '../../main.js'
-import { RadioGroup, Radio } from '../radio/radio'
-import { CheckboxGroup, Checkbox } from '../checkbox/checkbox'
+import { RadioGroup, Radio } from '../../component/common/radio/radio'
+import { CheckboxGroup, Checkbox } from '../../component/common/checkbox/checkbox'
 import './list.less'
 
 
@@ -17,7 +17,7 @@ type ListInfo = {
 }
 
 const ListCard: React.FC<ListInfo> = (props) => {
-	const { text, size, width, type, dataSource, pageSize = 3, onOk } = props
+	const { text, size, type, dataSource, pageSize = 3, onOk } = props
 	const [row, setRow] = useState<number>(0)
 	const [radioVal, setRadioVal] = useState<string>('')
 	const [checkboxVal, setCheckboxVal] = useState<any[]>([])
@@ -34,11 +34,8 @@ const ListCard: React.FC<ListInfo> = (props) => {
 			return false
 		}
 
-		const params = {
-			msg: type === 'radio' ? radioVal : checkboxVal.join(','),
-			sendRightMsg: true,
-		}
-		onOk(params)
+
+		onOk(type === 'radio' ? radioVal : checkboxVal.join(','))
 
 	}
 
@@ -55,7 +52,7 @@ const ListCard: React.FC<ListInfo> = (props) => {
 	return (
 		<div className={`${size ? `robot-list-${size}` : 'robot-list-default'} `}>
 			<TextCard text={text || '选择列表'} size={size ? size : 'default'} />
-			<div className={'robot-list-card'} style={{ width: width ? `${width}px` : '260px' }}>
+			<div className={'robot-list-card'}>
 				<div className={'robot-list-title'}>
 					选择列表
 				</div>
