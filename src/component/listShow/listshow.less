@@ -1,0 +1,57 @@
+@import '../../styles/mixins.less';
+@import '../../styles/variables.less';
+@namespace: robot-list-show;
+
+.@{namespace} {
+  &-wrapper {
+    .robot-msg-wrapper();
+    padding-bottom: 0px;
+  }
+  &-body {
+    margin-top: 10px;
+    width: 100%;
+    li {
+      width: auto;
+      margin: 0 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      border-bottom: 1px solid #E2E2E2;
+      color: #2A3038;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+  }
+  &-footer {
+    width: 100%;
+    border-top: 1px solid #E6E6E6;
+    text-align: center;
+    color: #47BAEE;
+    cursor: pointer;
+  }
+  &-default{
+    .@{namespace}-body li{
+      height: @common-default-column-height;
+      line-height: @common-default-column-height;
+      font-size: @default-font-size;;
+    }
+    .@{namespace}-footer {
+      height: @common-default-column-height;
+      line-height: @common-default-column-height;
+      font-size: @default-font-size;
+    }
+  }
+  &-small{
+    .@{namespace}-body li{
+      height: @common-small-column-height;
+      line-height: @common-small-column-height;
+      font-size: @small-font-size;;
+    }
+    .@{namespace}-footer {
+      height: @common-small-column-height;
+      line-height: @common-small-column-height;
+      font-size: @small-font-size;
+    }
+  } 
+}

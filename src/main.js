@@ -6,6 +6,7 @@ import ListCard from './component/listCard/index.tsx'
 import ScheduleShow from './component/scheduleShow/index.tsx'
 import PicCard from './component/picCard/index.tsx'
 import RelativeCard from './component/relativeCard/index.tsx'
+import ListShow from './component/listShow/index.tsx'
 
 // import OpenService from './component/openService/index.tsx'
 
@@ -16,5 +17,6 @@ export {
     ScheduleShow,
     PicCard,
     RelativeCard,
+    ListShow,
     // OpenService,
 }

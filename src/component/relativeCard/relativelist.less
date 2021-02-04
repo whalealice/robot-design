@@ -5,12 +5,14 @@
 .@{namespace} {
   &-wrapper{
     .robot-msg-wrapper();
+    padding-bottom: 0px;
   }
   &-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .robot-ellipsis()
   }
   &-body{
     width: 100%;
@@ -19,6 +21,7 @@
     color: #588CE9;
     cursor: pointer;
     list-style: disc inside none;
+    .robot-ellipsis()
   }
   &-body li:hover{
     color: #8dbbf5;
@@ -75,6 +78,22 @@
       height: @common-small-column-height;
       line-height: @common-small-column-height;
       font-size:  @small-font-size;
+    }
+  }
+  &-large{
+    .@{namespace}-header{
+			font-size: @large-font-size;
+			height: @common-large-column-height;
+    }
+    .@{namespace}-body li{
+      height: @relative-large-column-height;
+      line-height: @relative-large-column-height;
+      font-size: @large-font-size;;
+    }
+    .@{namespace}-footer {
+      height: @common-large-column-height;
+      line-height: @common-large-column-height;
+      font-size:  @large-font-size;
     }
   }
 }

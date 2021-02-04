@@ -14,7 +14,7 @@ const RelativeCard:React.FC<relativeInfo> = (props) => {
 	const [row, setRow] = useState<number>(0)
 	useEffect(() => {
 		setRow(pageSize)
-	}, [])
+	}, [pageSize])
 	const showOther = useCallback(() => {
 		if (row < dataSource.length) {
 			setRow(row => row + pageSize)
